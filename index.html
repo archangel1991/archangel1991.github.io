@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Test</title>
+</head>
+<body>
+<h1>Hello World</h1>
+<p>I'm hosted with GitHub Pages.</p>
+<div>
+	<video referrerpolicy="no-referrer" class="botsflow-video" width="100%" height="auto" ${isIOS() ? "autoplay muted playsinline" : ""} controls disablePictureInPicture controlslist="nodownload noplaybackrate" autoplay="autoplay" muted="muted" preload="auto">
+        <source referrerpolicy="no-referrer" src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4#t=0.5" type="video/mp4">
+    </video>
+</div>
+    <script>
+		function isIOS() {
+			let userAgentData = navigator?.userAgent;
+			if(userAgentData == undefined) {
+				alert("userAgentData is undefined!");
+				return false;
+			}
+			return [
+			  'iPad Simulator',
+			  'iPhone Simulator',
+			  'iPod Simulator',
+			  'iPad',
+			  'iPhone',
+			  'iPod'
+			].includes(userAgentData.platform)
+			// iPad on iOS 13 detection
+			|| (window.navigator?.userAgent?.includes("Mac") && "ontouchend" in document)
+			|| /(iPad|iPhone|iPod)/g.test(navigator?.userAgent)
+			|| /iPad|iPhone|iPod/.test(navigator?.platform)
+			|| (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)
+		}
+			alert(isIOS());
+    </script>
+</body>
+</html>

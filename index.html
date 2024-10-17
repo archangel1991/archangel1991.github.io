@@ -29,15 +29,34 @@
 			// iPad on iOS 13 detection
 			|| (window.navigator?.userAgent?.includes("Mac") && "ontouchend" in document)
 		}
+				document.getElementById("video").addEventListener('loadstart', (event) => {
+            alert("video loadstart");
+        });
 		document.getElementById("video").addEventListener('loadedmetadata', (event) => {
-                            alert("video is loadable");
-                        });
-                        document.getElementById("video").addEventListener('canplay', (event) => {
+            alert("video loadedmetadata");
+        });
+        document.getElementById("video").addEventListener('canplay', (event) => {
+						alert("video canplay");
                             autoPlayVideo();
                             setTimeout(function() {
                                 console.log("after timeout");
                             }, 0);
-                        });
+        });
+		document.getElementById("video").addEventListener('canplaythrough', (event) => {
+            alert("video canplaythrough");
+        });
+		document.getElementById("video").addEventListener('error', (event) => {
+            alert("video error");
+			if(event) {
+				alert(JSON.stringify(event));
+			}
+        });
+		document.getElementById("video").addEventListener('suspend', (event) => {
+            alert("video suspend");
+        });
+		document.getElementById("video").addEventListener('ended', (event) => {
+            alert("video ended");
+        });
 		
 		document.getElementById("video").getElementsByTagName("source")[0].addEventListener('error', function(event) {
 			alert("video error!");

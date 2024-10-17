@@ -7,7 +7,7 @@
 <h1>Hello World</h1>
 <p>I'm hosted with GitHub Pages.</p>
 <div>
-	<video referrerpolicy="no-referrer" class="botsflow-video" width="100%" height="auto" ${isIOS() ? "autoplay muted playsinline" : ""} controls disablePictureInPicture controlslist="nodownload noplaybackrate" autoplay="autoplay" muted="muted" preload="auto">
+	<video id="video" referrerpolicy="no-referrer" class="botsflow-video" width="100%" height="auto" ${isIOS() ? "autoplay muted playsinline" : ""} controls disablePictureInPicture controlslist="nodownload noplaybackrate" autoplay="autoplay" muted="muted" preload="auto">
         <source referrerpolicy="no-referrer" src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4#t=0.5" type="video/mp4">
     </video>
 </div>
@@ -28,11 +28,26 @@
 			].includes(userAgentData.platform)
 			// iPad on iOS 13 detection
 			|| (window.navigator?.userAgent?.includes("Mac") && "ontouchend" in document)
-			|| /(iPad|iPhone|iPod)/g.test(navigator?.userAgent)
-			|| /iPad|iPhone|iPod/.test(navigator?.platform)
-			|| (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)
 		}
-			alert(isIOS());
+		document.getElementById("video").addEventListener('loadedmetadata', (event) => {
+                            alert("video is loadable");
+                        });
+                        document.getElementById("video").addEventListener('canplay', (event) => {
+                            autoPlayVideo();
+                            setTimeout(function() {
+                                console.log("after timeout");
+                            }, 0);
+                        });
+		function autoPlayVideo() {
+			let playPromise = document.getElementById("video").play();
+			if (playPromise !== undefined) {
+				playPromise.then(_ => {
+				// Automatic playback started!
+				alert("automatic playback started");
+				}).catch(err => console.error(err));
+			}
+		}
+		alert("Is IOS: " + isIOS());	
     </script>
 </body>
 </html>

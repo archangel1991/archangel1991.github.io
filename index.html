@@ -8,7 +8,7 @@
 <p>I'm hosted with GitHub Pages.</p>
 <div>
 	<video id="video" referrerpolicy="no-referrer" class="botsflow-video" width="100%" height="auto" ${isIOS() ? "autoplay muted playsinline" : ""} controls disablePictureInPicture controlslist="nodownload noplaybackrate" autoplay="autoplay" muted="muted" preload="auto">
-        <source referrerpolicy="no-referrer" src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4#t=0.5" type="video/mp4">
+        <source referrerpolicy="no-referrer" src="https://editor.sextingo.com/media-stream?mediaUrl=https://drive.google.com/uc?id=1XZluXcswcTG1or9WMQ2VuZUCC8UulhkC&type=video#t=0.5" type="video/mp4">
     </video>
 </div>
     <script>
@@ -38,6 +38,14 @@
                                 console.log("after timeout");
                             }, 0);
                         });
+		
+		document.getElementById("video").getElementsByTagName("source")[0].addEventListener('error', function(event) {
+			alert("video error!");
+			if(event) {
+				alert(JSON.stringify(event));
+			}
+		})
+		
 		function autoPlayVideo() {
 			let playPromise = document.getElementById("video").play();
 			if (playPromise !== undefined) {

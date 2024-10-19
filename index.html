@@ -6,8 +6,8 @@
 <body>
 <h1>Hello World</h1>
 <p>I'm hosted with GitHub Pages.</p>
-<div>
-	<video id="video" referrerpolicy="no-referrer" class="botsflow-video" width="100%" height="auto" ${isIOS() ? "autoplay muted playsinline" : ""} controls disablePictureInPicture controlslist="nodownload noplaybackrate" autoplay="autoplay" muted="muted" preload="auto">
+<div id="video-container">
+	<video id="video" referrerpolicy="no-referrer" class="botsflow-video" width="100%" height="auto" controls disablePictureInPicture controlslist="nodownload noplaybackrate" autoplay="autoplay" muted="muted" autoplay muted playsinline preload="auto">
         <source referrerpolicy="no-referrer" src="https://editor.sextingo.com/media-stream?mediaUrl=https://drive.google.com/uc?id=1XZluXcswcTG1or9WMQ2VuZUCC8UulhkC&type=video#t=0.5" type="video/mp4">
     </video>
 </div>
@@ -49,6 +49,8 @@
             alert("video error");
 			if(event) {
 				alert(JSON.stringify(event));
+				alert(JSON.stringify(event, ["message", "arguments", "type", "name"]));
+				alert(JSON.stringify(event, ["id", "reason", "error", "filename"]))
 			}
         });
 		document.getElementById("video").addEventListener('suspend', (event) => {
@@ -75,6 +77,7 @@
 			}
 		}
 		alert("Is IOS: " + isIOS());	
+		alert(document.getElementById("video-container").innerHTML)
     </script>
 </body>
 </html>
